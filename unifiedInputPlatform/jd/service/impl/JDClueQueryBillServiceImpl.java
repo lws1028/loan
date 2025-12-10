@@ -1,11 +1,11 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jd.service.impl;
 
 import com.zlhj.commonLoan.domain.mainLoan.LoanId;
-import com.zlhj.unifiedInputPlatform.jd.convert.JDQueryBillConvert;
-import com.zlhj.unifiedInputPlatform.jd.pojo.JDClueQueryBillBusiness;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.ClueQueryBillBusinessFactory;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.QueryBillConvert;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
+import com.zlhj.unifiedInputPlatform.jd.pojo.ClueQueryBillBusiness;
 import com.zlhj.unifiedInputPlatform.jd.service.JDClueQueryBillService;
-import com.zlhj.unifiedInputPlatform.jd.service.factory.JDClueQueryBillBusinessFactory;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,18 +15,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JDClueQueryBillServiceImpl implements JDClueQueryBillService {
 
-    private final JDClueQueryBillBusinessFactory jdClueQueryBillBusinessFactory;
+    private final ClueQueryBillBusinessFactory clueQueryBillBusinessFactory;
 
     @Override
-    public JDClueQueryBillVO create(LoanId loanId) {
-        JDClueQueryBillBusiness business = jdClueQueryBillBusinessFactory.create(loanId);
-        return JDQueryBillConvert.convert(business);
+    public QueryClueBillDTO create(LoanId loanId) {
+        ClueQueryBillBusiness business = clueQueryBillBusinessFactory.create(loanId);
+        return QueryBillConvert.convert(business);
 
     }
 
     @Override
-    public JDClueQueryBillVO createForJdJt(LoanId loanId) {
-        JDClueQueryBillBusiness business = jdClueQueryBillBusinessFactory.create(loanId);
-        return JDQueryBillConvert.convertForJdJt(business);
+    public QueryClueBillDTO createForJdJt(LoanId loanId) {
+        ClueQueryBillBusiness business = clueQueryBillBusinessFactory.create(loanId);
+        return QueryBillConvert.convert(business);
     }
 }

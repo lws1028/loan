@@ -11,23 +11,22 @@ import com.zlhj.commonLoan.business.common.exception.BusinessException;
 import com.zlhj.commonLoan.business.jjyh.service.LoanAppStatusService;
 import com.zlhj.commonLoan.domain.cule.ClueNumber;
 import com.zlhj.commonLoan.domain.mainLoan.LoanId;
-import com.zlhj.loan.dao.SplUserInfoMapper;
+import com.zlhj.entity.BusinessBasicEntity;
+import com.zlhj.jd.vo.DirectCustomerStatusDto;
 import com.zlhj.loan.entity.SapdcslasRepository;
+import com.zlhj.loan.service.BankApprovalRecordService;
+import com.zlhj.loan.vo.BankApprovalRecordPo;
 import com.zlhj.mapper.LoanInitialRepaymentScheduleMapper;
 import com.zlhj.mapper.SplBussinessbasicMapper;
 import com.zlhj.mq.provider.Sender;
-import com.zlhj.unifiedInputPlatform.ant.dto.AntRepaymentChangeNotifyDTO;
-import com.zlhj.unifiedInputPlatform.jd.dto.JDLoanSuccessDTO;
-import com.zlhj.entity.BusinessBasicEntity;
-import com.zlhj.jd.vo.DirectCustomerStatusDto;
-import com.zlhj.loan.service.BankApprovalRecordService;
-import com.zlhj.loan.vo.BankApprovalRecordPo;
 import com.zlhj.tianfu.Util.Tool;
+import com.zlhj.unifiedInputPlatform.ant.dto.AntRepaymentChangeNotifyDTO;
 import com.zlhj.unifiedInputPlatform.ant.dto.ClueStatusNotifyDTO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
+import com.zlhj.unifiedInputPlatform.jd.dto.JDLoanSuccessDTO;
 import com.zlhj.unifiedInputPlatform.jd.dto.JDQueryClueStatusCommand;
 import com.zlhj.unifiedInputPlatform.jd.service.JDClueQueryBillService;
 import com.zlhj.unifiedInputPlatform.jd.service.JDService;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
 import com.zlhj.unifiedInputPlatform.universal.service.impl.UnifiedInputPlatformServiceImpl;
 import com.zlhj.user.vo.ExhibitionAndPayInfoRepository;
 import com.zlhj.user.vo.ExhibitionAndPayInfoVo;
@@ -335,7 +334,7 @@ public class JDServiceImpl implements JDService {
 	 * 查询账单详情
 	 */
 	@Override
-	public JDClueQueryBillVO clueQueryBill(ClueNumber clueNumber) {
+	public QueryClueBillDTO clueQueryBill(ClueNumber clueNumber) {
 
 		Integer jdChannelPattern = 23;
 		LoanId loanId = unifiedInputPlatformService.getLoanIdByClueSystem(clueNumber, jdChannelPattern);

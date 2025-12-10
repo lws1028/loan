@@ -1,11 +1,9 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.ant.dto;
 
-import com.zlhj.unifiedInputPlatform.ant.dto.IdentityVerification;
 import com.zlhj.unifiedInputPlatform.ant.dto.Vehicle;
 import com.zlhj.unifiedInputPlatform.ant.dto.VehicleValuation;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 @Data

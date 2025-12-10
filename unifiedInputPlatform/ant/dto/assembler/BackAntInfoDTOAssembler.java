@@ -1,8 +1,6 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.ant.dto.assembler;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.zlhj.Interface.vo.CarAssessPriceNewObject;
 import com.zlhj.commonLoan.util.DateUtil;
 import com.zlhj.electronicCredit.pojo.CollectionInterfaces;
 import com.zlhj.hrxj.interfaces.dto.CarInfoDto;

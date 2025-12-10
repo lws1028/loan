@@ -1,9 +1,9 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jd.service;
 
-import com.zlhj.unifiedInputPlatform.ant.dto.ClueStatusNotifyDTO;
-import com.zlhj.unifiedInputPlatform.jd.dto.JDQueryClueStatusCommand;
 import com.zlhj.commonLoan.domain.cule.ClueNumber;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
+import com.zlhj.unifiedInputPlatform.ant.dto.ClueStatusNotifyDTO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
+import com.zlhj.unifiedInputPlatform.jd.dto.JDQueryClueStatusCommand;
 
 public interface JDService {
 	/**
@@ -17,7 +17,7 @@ public interface JDService {
 	/**
 	 * 查询账单详情
 	 */
-	JDClueQueryBillVO clueQueryBill(ClueNumber clueNumber);
+	QueryClueBillDTO clueQueryBill(ClueNumber clueNumber);
 
 	ClueStatusNotifyDTO carLifeQueryClueStatus(JDQueryClueStatusCommand command);
 }

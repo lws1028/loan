@@ -5,9 +5,9 @@ import com.zlhj.commonLoan.domain.cule.ClueNumber;
 import com.zlhj.commonLoan.util.JSONUtil;
 import com.zlhj.hrxj.business.dto.ResultDto;
 import com.zlhj.unifiedInputPlatform.ant.dto.ClueStatusNotifyDTO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jd.dto.JDQueryClueStatusCommand;
 import com.zlhj.unifiedInputPlatform.jd.service.JDService;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +53,7 @@ public class JDController {
 		log.info("{} 请求参数 = {}", interfaceFunction, applyNo);
 
 		try {
-			JDClueQueryBillVO jdClueQueryBillVO = jdService.clueQueryBill(new ClueNumber(applyNo));
+			QueryClueBillDTO jdClueQueryBillVO = jdService.clueQueryBill(new ClueNumber(applyNo));
 			log.info("{} 返回参数 = {}", interfaceFunction, jdClueQueryBillVO);
 			return ResultDto.searchSuccess(jdClueQueryBillVO);
 		} catch (BusinessException | IllegalArgumentException e) {

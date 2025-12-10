@@ -49,9 +49,9 @@ import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
 import com.zlhj.unifiedInputPlatform.ant.dto.assembler.FddRASignDTOAssembler;
 import com.zlhj.unifiedInputPlatform.ant.exceptions.AntPreApproveException;
 import com.zlhj.unifiedInputPlatform.ant.transform.CreditAuthorizationTransform;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jd.dto.JDLoanSuccessDTO;
 import com.zlhj.unifiedInputPlatform.jd.service.JDClueQueryBillService;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtClueStatusNotifyDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtQueryClueInfoDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtRepaymentChangeNotifyDTO;
@@ -470,7 +470,7 @@ public class JdJtServiceImpl implements JdJtService {
 	}
 
 	@Override
-	public JDClueQueryBillVO clueQueryBill(String applyNo) {
+	public QueryClueBillDTO clueQueryBill(String applyNo) {
 
 		LoanId loanId = unifiedInputPlatformService.getLoanIdByClueSystem(new ClueNumber(applyNo), 35);
 

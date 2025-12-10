@@ -19,7 +19,10 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -45,7 +48,7 @@ public class AntRepaymentPlanFactory{
 	@Autowired
 	private LoanRepayDetailRepository loanRepayDetailRepository;
 
-	public List<com.zlhj.unifiedInputPlatform.ant.dto.AntRepaymentPlanDTO> create(LoanId loanId){
+	public List<AntRepaymentPlanDTO> create(LoanId loanId){
 		Sapdcslas sapdcslas = getSapdcslas(loanId.get());//贷款节点信息
 		if(sapdcslas == null){
 			return null;

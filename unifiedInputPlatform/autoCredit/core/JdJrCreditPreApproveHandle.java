@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Service
+@Service("jdJrCreditPreApproveHandle")
 public class JdJrCreditPreApproveHandle extends BaseCreditPreApproveHandle<CluePreApproveDTO> {
 
 	@Autowired

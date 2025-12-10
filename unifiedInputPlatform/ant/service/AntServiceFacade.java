@@ -5,7 +5,6 @@ import com.zlhj.commonLoan.business.common.exception.ClueResubmissionException;
 import com.zlhj.unifiedInputPlatform.ant.dto.*;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AntServiceFacade {
 

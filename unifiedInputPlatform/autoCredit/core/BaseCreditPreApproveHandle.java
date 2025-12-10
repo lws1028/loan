@@ -1,13 +1,13 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.autoCredit.core;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.apollo.org.vo.OrgUserVo;
 import com.apollo.org.vo.UserObjectRepository;
 import com.common.LocalDateUtils;
 import com.zlhj.common.core.utils.StringUtils;
 import com.zlhj.commonLoan.business.clue.dto.LoanStatePushToClueDTO;
 import com.zlhj.commonLoan.business.clue.enums.LoanStatusChangeEnum;
+import com.zlhj.commonLoan.business.common.pojo.Identity;
 import com.zlhj.infrastructure.po.*;
 import com.zlhj.infrastructure.repository.*;
 import com.zlhj.infrastructure.routing.RemoteBigDataService;
@@ -17,7 +17,6 @@ import com.zlhj.loan.SendEmailMessage;
 import com.zlhj.mq.dto.PreApproveMessage;
 import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignDTO;
 import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
-import com.zlhj.commonLoan.business.common.pojo.Identity;
 import com.zlhj.unifiedInputPlatform.autoCredit.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,27 +82,6 @@ public abstract class BaseCreditPreApproveHandle<T> {
 					message.getChannelCode(), feedType()));
 		} catch (Exception e) {
 			handleException(e, message);
-		}
-	}
-	public void preApproveRetry() {
-		// 重试逻辑
-		String listRedisKey = redisRetryKey();
-		Long size = this.redisTemplate.opsForList().size(listRedisKey);
-		if (size != null && size > 0) {
-			for (int i = 0; i < size; i++) {
-				String messageStr = this.redisTemplate.opsForList().rightPop(listRedisKey);
-				if (StringUtils.isBlank(messageStr)) {
-					continue;
-				}
-				try {
-					PreApproveMessage msg = JSONObject.parseObject(messageStr, PreApproveMessage.class);
-					this.executePreApprove(msg);
-				} catch (Exception e) {
-					log.error("[重试处理{}自动预审异常], 原因={}", channelName(), e.getMessage(), e);
-					// 重新入队
-					this.redisTemplate.opsForList().leftPush(listRedisKey, messageStr);
-				}
-			}
 		}
 	}
 	protected void checkCarAge(CreditAuthorization auth) throws CarAgeNotMatchException {

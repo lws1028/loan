@@ -1,9 +1,9 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jd.service;
 
 import com.zlhj.commonLoan.domain.mainLoan.LoanId;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 
 public interface JDClueQueryBillService {
-    JDClueQueryBillVO create(LoanId loanId);
-    JDClueQueryBillVO createForJdJt(LoanId loanId);
+    QueryClueBillDTO create(LoanId loanId);
+    QueryClueBillDTO createForJdJt(LoanId loanId);
 }

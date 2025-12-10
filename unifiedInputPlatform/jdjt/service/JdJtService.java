@@ -1,7 +1,7 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jdjt.service;
 
 import com.zlhj.mq.dto.JdJtPreApproveMessage;
-import com.zlhj.unifiedInputPlatform.jd.vo.JDClueQueryBillVO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtClueStatusNotifyDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtQueryClueInfoDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.VehicleEvaluationNotifyDTO;
@@ -25,7 +25,7 @@ public interface JdJtService {
 	/**
 	 * 还款计划查询
 	 */
-	JDClueQueryBillVO clueQueryBill(String applyNo);
+	QueryClueBillDTO clueQueryBill(String applyNo);
 
 	/**
 	 * 推送放款成功通知
