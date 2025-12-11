@@ -3,7 +3,7 @@ package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.autoCredit.controller
 import com.zlhj.commonLoan.business.common.exception.BusinessException;
 import com.zlhj.commonLoan.util.JSONUtil;
 import com.zlhj.hrxj.business.dto.ResultDto;
-import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.service.ClueQueryService;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.ClueStatusInfoDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueInfoDTO;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ClueController {
 
 	@Autowired
-	private CreditServiceSupport creditServiceSupport;
+	private ClueQueryService clueQueryService;
 
 	@GetMapping("/status/query")
 	public ResultDto queryClue(QueryClueInfoDTO queryDTO) {
@@ -28,7 +28,7 @@ public class ClueController {
 		log.info("{} 请求参数 = {}", interfaceFunction, queryDTO);
 
 		try {
-			ClueStatusInfoDTO notifyDTO = creditServiceSupport.queryClueInfo(queryDTO);
+			ClueStatusInfoDTO notifyDTO = clueQueryService.queryClueInfo(queryDTO);
 			log.info("{} 返回参数 = {}", interfaceFunction, JSONUtil.toJsonStringCommon(notifyDTO));
 			return ResultDto.searchSuccess(notifyDTO);
 		} catch (BusinessException | IllegalArgumentException e) {
@@ -49,7 +49,7 @@ public class ClueController {
 		log.info("{} 请求参数 = {}", interfaceFunction, applyNo);
 
 		try {
-			QueryClueBillDTO jdClueQueryBillVO = creditServiceSupport.clueQueryBill(applyNo);
+			QueryClueBillDTO jdClueQueryBillVO = clueQueryService.clueQueryBill(applyNo);
 			log.info("{} 返回参数 = {}", interfaceFunction, jdClueQueryBillVO);
 			return ResultDto.searchSuccess(jdClueQueryBillVO);
 		} catch (BusinessException | IllegalArgumentException e) {
@@ -70,7 +70,7 @@ public class ClueController {
 		log.info("{} 请求参数 = {}", interfaceFunction, applyNo);
 
 		try {
-			VehicleEvaluationNotifyDTO evaluationNotifyDTO = creditServiceSupport.queryVehicleEvaluation(applyNo);
+			VehicleEvaluationNotifyDTO evaluationNotifyDTO = clueQueryService.queryVehicleEvaluation(applyNo);
 			log.info("{} 返回参数 = {}", interfaceFunction, evaluationNotifyDTO);
 			return ResultDto.searchSuccess(evaluationNotifyDTO);
 		} catch (BusinessException | IllegalArgumentException e) {

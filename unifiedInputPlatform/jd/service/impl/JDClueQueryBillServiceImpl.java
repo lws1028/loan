@@ -1,11 +1,11 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jd.service.impl;
 
 import com.zlhj.commonLoan.domain.mainLoan.LoanId;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.ClueQueryBillBusinessFactory;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.QueryBillConvert;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jd.pojo.ClueQueryBillBusiness;
 import com.zlhj.unifiedInputPlatform.jd.service.JDClueQueryBillService;
-import com.zlhj.unifiedInputPlatform.autoCredit.core.ClueQueryBillBusinessFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,7 @@ import com.zlhj.infrastructure.po.CreditAuthorization;
 
 public interface PreApproveValidator<T> {
 
-	void validate(CreditAuthorization auth, T data);
+	void validate(CreditAuthorization auth);
 
 	default boolean supports(ClueChanelCode channelCode) {
 		return false;

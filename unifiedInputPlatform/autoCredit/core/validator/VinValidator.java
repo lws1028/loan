@@ -15,7 +15,7 @@ public class VinValidator implements PreApproveValidator<CluePreApproveDTO> {
 	private VinBlacklistRepository vinBlacklistRepository;
 
 	@Override
-	public void validate(CreditAuthorization creditAuth, CluePreApproveDTO data) {
+	public void validate(CreditAuthorization creditAuth) {
 // 车架号校验
 		String vin = creditAuth.getChassisNumber();
 		// 长度必须为17位

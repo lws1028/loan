@@ -15,7 +15,8 @@ import java.time.format.DateTimeFormatter;
 @Component
 @Slf4j
 public class CarAgeValidator implements PreApproveValidator<CluePreApproveDTO> {
-	public void validate(CreditAuthorization auth, CluePreApproveDTO data) {
+	@Override
+	public void validate(CreditAuthorization auth) {
 		if (StringUtils.isBlank(auth.getVehicleRegisterDate())) {
 			return;
 		}

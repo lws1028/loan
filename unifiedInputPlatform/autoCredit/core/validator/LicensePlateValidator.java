@@ -19,7 +19,7 @@ public class LicensePlateValidator implements PreApproveValidator<CluePreApprove
 	private LicenseAccessWhitelistRepository licenseAccessWhitelistRepository;
 
 	@Override
-	public void validate(CreditAuthorization creditAuth, CluePreApproveDTO data) {
+	public void validate(CreditAuthorization creditAuth) {
 		try {
 			// 车辆上牌日期
 			LocalDate registerDate = LocalDate.parse(creditAuth.getVehicleRegisterDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));

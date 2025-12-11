@@ -3,14 +3,13 @@ package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.autoCredit.universal.
 import com.apollo.alds.util.ConvertionUtil;
 import com.apollo.org.vo.OrgUserVo;
 import com.apollo.util.DateUtil;
-
 import com.zlhj.infrastructure.po.CreditAuthorization;
 import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveApiRespDTO;
 import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.infrastructure.routing.dto.clue.JdJtCluePreApproveDTO;
 import com.zlhj.mq.dto.AntPreApproveMessage;
-import com.zlhj.mq.dto.PreApproveMessage;
 import com.zlhj.mq.dto.JdJtPreApproveMessage;
+import com.zlhj.mq.dto.PreApproveMessage;
 import org.springframework.util.Assert;
 
 public class CreditAuthorizationTransform {

@@ -3,7 +3,7 @@ package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.jdjt.controller;
 import com.zlhj.commonLoan.business.common.exception.BusinessException;
 import com.zlhj.commonLoan.util.JSONUtil;
 import com.zlhj.hrxj.business.dto.ResultDto;
-import com.zlhj.unifiedInputPlatform.ant.dto.*;
+import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
 import com.zlhj.unifiedInputPlatform.ant.service.AntService;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.JdJtClueStatusNotifyDTO;

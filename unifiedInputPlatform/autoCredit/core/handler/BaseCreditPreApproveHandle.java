@@ -5,10 +5,8 @@ import com.apollo.org.vo.OrgUserVo;
 import com.apollo.org.vo.UserObjectRepository;
 import com.apollo.util.DateUtil;
 import com.common.LocalDateUtils;
-import com.zlhj.common.core.utils.StringUtils;
 import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
-import com.zlhj.commonLoan.business.basic.service.BusinessJudgmentConditionService;
-import com.zlhj.commonLoan.business.clue.dto.LoanStatePushToClueDTO;
+import com.zlhj.commonLoan.business.common.pojo.Identity;
 import com.zlhj.electronicCredit.pojo.CreditLoan;
 import com.zlhj.electronicCredit.pojo.CreditLoanRepository;
 import com.zlhj.electronicCredit.pojo.CreditUserVO;
@@ -18,15 +16,16 @@ import com.zlhj.infrastructure.repository.*;
 import com.zlhj.infrastructure.routing.RemoteBigDataService;
 import com.zlhj.infrastructure.routing.dto.RemoteInterfaceRequest;
 import com.zlhj.infrastructure.routing.dto.RemoteInterfaceResponse;
+import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.loan.SendEmailMessage;
 import com.zlhj.main.fumin.enums.BankOrgNameType;
 import com.zlhj.mq.dto.PreApproveMessage;
+import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.context.BoId;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.strategy.NotificationStrategy;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.validator.PreApproveValidator;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.FddRASignDTO;
-import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
-import com.zlhj.commonLoan.business.common.pojo.Identity;
 import com.zlhj.unifiedInputPlatform.autoCredit.exceptions.*;
 import com.zlhj.webank.business.entity.SpcCreditOtherInfoEntity;
 import com.zlhj.webank.business.entity.SpcCreditOtherInfoRepository;
@@ -70,6 +69,8 @@ public abstract class BaseCreditPreApproveHandle<T> {
 	private CreditLoanRepository creditLoanRepository;
 	@Autowired
 	private SpcCreditOtherInfoRepository creditOtherInfoRepository;
+	@Autowired
+	private List<PreApproveValidator<CluePreApproveDTO>> validators;
 	@Value("${zlhj.image.postUrlDomain}")
 	protected String fileUrl;
 
@@ -85,7 +86,7 @@ public abstract class BaseCreditPreApproveHandle<T> {
 
 			creditAuthorization = transformToLocalAuth(remoteData, message, orgUserVo);
 
-			if (!customScreening(creditAuthorization, remoteData)) {
+			if (!customScreening(creditAuthorization)) {
 				return;
 			}
 
@@ -124,8 +125,20 @@ public abstract class BaseCreditPreApproveHandle<T> {
 	}
 	protected abstract NotificationStrategy notificationStrategy();
 
-	protected boolean customScreening(CreditAuthorization auth, T data) {
-		return true;
+	protected boolean customScreening(CreditAuthorization auth) {
+		try {
+			for (PreApproveValidator<CluePreApproveDTO> v : validators) {
+				if (!v.supports(ClueChanelCode.getByCode(auth.getChannelCode()))) {
+					continue;
+				}
+				v.validate(auth);
+			}
+			return true;
+
+		} catch (Exception e) {
+			log.error("京东金融 初筛逻辑执行异常", e);
+			throw e;
+		}
 	}
 
 	protected void startFddSignFlow(CreditAuthorization auth, T data, List<AuthorizedImage> images) {

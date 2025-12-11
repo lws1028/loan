@@ -4,9 +4,10 @@ import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
 import com.zlhj.commonLoan.business.clue.dto.LoanStatePushToClueDTO;
 import com.zlhj.commonLoan.business.clue.enums.LoanStatusChangeEnum;
 import com.zlhj.commonLoan.domain.creditBusiness.CreditOrderId;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.context.BoId;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.context.PreReviewContext;
-import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.service.ClueQueryService;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.VehicleEvaluationNotifyDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class JdJrFinanceNotificationStrategy implements NotificationStrategy {
 
 	@Autowired
 	private CreditServiceSupport creditServiceSupport;
+	@Autowired
+	private ClueQueryService clueQueryService;
 
 	@Override
 	public void onPrePass(BoId boId, ClueChanelCode clueChanelCode, CreditOrderId creditOrderId) {
 		log.info("[京东金融] 策略执行：预审通过通知, boId={}", boId.getValue());
 
-		VehicleEvaluationNotifyDTO evaluationNotifyDTO = creditServiceSupport.queryVehicleEvaluation(boId.getValue());
+		VehicleEvaluationNotifyDTO evaluationNotifyDTO = clueQueryService.queryVehicleEvaluation(boId.getValue());
 
 		LoanStatusChangeEnum statusChangeEnum = "SUCCESS".equals(evaluationNotifyDTO.getCheckStatus()) ?
 				LoanStatusChangeEnum.AUTO_PRE_PASS : LoanStatusChangeEnum.AUTO_PRE_REJECT;
