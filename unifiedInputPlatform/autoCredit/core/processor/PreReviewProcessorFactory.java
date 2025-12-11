@@ -1,8 +1,8 @@
 package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.autoCredit.core.processor;
 
 import com.zlhj.commonLoan.business.appCommon.domain.credit.ZQHTCreditType;
-import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.context.PreReviewContext;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.CreditServiceSupport;
 import com.zlhj.unifiedInputPlatform.autoCredit.core.service.CreditRiskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
