@@ -3,7 +3,6 @@ package com.zlhj.unifiedInputPlatform.unifiedInputPlatform.ant.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Data

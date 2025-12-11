@@ -44,11 +44,11 @@ import com.zlhj.mapper.LoanInitialRepaymentScheduleMapper;
 import com.zlhj.mapper.SplBussinessbasicMapper;
 import com.zlhj.mq.dto.JdJtPreApproveMessage;
 import com.zlhj.mq.provider.Sender;
-import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignDTO;
+import com.zlhj.unifiedInputPlatform.autoCredit.dto.FddRASignDTO;
 import com.zlhj.unifiedInputPlatform.ant.dto.FddRASignVO;
-import com.zlhj.unifiedInputPlatform.ant.dto.assembler.FddRASignDTOAssembler;
+import com.zlhj.unifiedInputPlatform.autoCredit.universal.transform.FddRASignDTOAssembler;
 import com.zlhj.unifiedInputPlatform.ant.exceptions.AntPreApproveException;
-import com.zlhj.unifiedInputPlatform.ant.transform.CreditAuthorizationTransform;
+import com.zlhj.unifiedInputPlatform.autoCredit.universal.transform.CreditAuthorizationTransform;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.jd.dto.JDLoanSuccessDTO;
 import com.zlhj.unifiedInputPlatform.jd.service.JDClueQueryBillService;
@@ -223,7 +223,7 @@ public class JdJtServiceImpl implements JdJtService {
 				creditAuthorizationRepository.saveData(creditAuthorization);
 
 				//推送京东金条预审结果通知
-				LoanStatePushToClueDTO pre = new LoanStatePushToClueDTO(message.getBoId(), null, LoanStatusChangeEnum.AUTO_PRE_REJECT.getValue(), 35, "JDJT_NOTICE");
+                LoanStatePushToClueDTO pre = new LoanStatePushToClueDTO(message.getBoId(), null, LoanStatusChangeEnum.AUTO_PRE_REJECT.getValue(), message.getChannelCode(), "JDJT_NOTICE");
 				unifiedInputPlatformService.realTimeInteraction(pre);
 				sender.jdJtPrePassPush(pre);
 				return;
@@ -260,7 +260,7 @@ public class JdJtServiceImpl implements JdJtService {
 					creditAuthorizationRepository.saveData(creditAuthorization);
 
 					// 推送京东金条预审结果通知
-					LoanStatePushToClueDTO pre = new LoanStatePushToClueDTO(message.getBoId(), null, LoanStatusChangeEnum.AUTO_PRE_REJECT.getValue(), 35, "JDJT_NOTICE");
+                    LoanStatePushToClueDTO pre = new LoanStatePushToClueDTO(message.getBoId(), null, LoanStatusChangeEnum.AUTO_PRE_REJECT.getValue(), message.getChannelCode(), "JDJT_NOTICE");
 					pre.setRefuseReason(e.getMessage());
 					unifiedInputPlatformService.realTimeInteraction(pre);
 					sender.jdJtPrePassPush(pre);
@@ -461,7 +461,7 @@ public class JdJtServiceImpl implements JdJtService {
 									data.getBoId(),
 									null,
 									LoanStatusChangeEnum.LEND_SUC.getValue(),
-									35,
+									data.getChannelPartner(),
 									"JDJT_NOTICE"
 							)
 					);

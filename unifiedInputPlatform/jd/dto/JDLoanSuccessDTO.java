@@ -16,4 +16,6 @@ public class JDLoanSuccessDTO {
      * 主贷款id
      */
     private Integer loanId;
+
+    private Integer channelPartner;
 }

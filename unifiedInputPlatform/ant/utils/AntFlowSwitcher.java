@@ -23,7 +23,7 @@ public class AntFlowSwitcher {
     private final RedisTemplate<String, String> redisTemplate;
     private final ObjectMapper objectMapper;
 
-    private volatile AntCreditSwitchConfig config = new AntCreditSwitchConfig();
+    private volatile com.zlhj.unifiedInputPlatform.ant.utils.AntCreditSwitchConfig config = new com.zlhj.unifiedInputPlatform.ant.utils.AntCreditSwitchConfig();
 
 	public AntFlowSwitcher(RedisTemplate<String, String> redisTemplate, ObjectMapper objectMapper) {
 		this.redisTemplate = redisTemplate;

@@ -9,13 +9,10 @@ import com.zlhj.commonLoan.business.appCommon.domain.credit.ZQHTCredit;
 import com.zlhj.commonLoan.business.appCommon.domain.credit.ZQHTCreditType;
 import com.zlhj.commonLoan.business.appCommon.enums.ZQHTCreditRuleResult;
 import com.zlhj.commonLoan.business.appCommon.enums.ZQHTPreApproveRuleResult;
-import com.zlhj.commonLoan.business.appCommon.service.CreditInvestigationService;
-import com.zlhj.commonLoan.business.appCommon.service.RuleEngineService;
 import com.zlhj.commonLoan.business.basic.service.WeChatMessagePushService;
 import com.zlhj.commonLoan.business.clue.dto.LoanStatePushToClueDTO;
 import com.zlhj.commonLoan.business.clue.enums.LoanStatusChangeEnum;
 import com.zlhj.commonLoan.business.common.exception.BusinessException;
-import com.zlhj.commonLoan.domain.creditBusiness.CreditOrderId;
 import com.zlhj.commonLoan.domain.creditBusiness.hcd.HCDCreditBusiness;
 import com.zlhj.commonLoan.domain.mainLoan.LoanId;
 import com.zlhj.commonLoan.util.StringUtil;
@@ -38,7 +35,7 @@ import com.zlhj.mq.provider.Sender;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.ClueStatusInfoDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueBillDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.dto.QueryClueInfoDTO;
-import com.zlhj.unifiedInputPlatform.autoCredit.strategy.NotificationStrategy;
+import com.zlhj.unifiedInputPlatform.autoCredit.core.strategy.NotificationStrategy;
 import com.zlhj.unifiedInputPlatform.jd.pojo.ClueQueryBillBusiness;
 import com.zlhj.unifiedInputPlatform.jdjt.dto.VehicleEvaluationNotifyDTO;
 import com.zlhj.unifiedInputPlatform.universal.service.UnifiedInputPlatformService;
@@ -61,13 +58,9 @@ import java.util.stream.Collectors;
 @Component
 public class CreditServiceSupport {
     @Autowired
-    private CreditInvestigationService creditInvestigationService;
-    @Autowired
     private TelemarketingCreditRepository telemarketingCreditRepository;
     @Autowired
     private Map<String, TelemarketingCreditDomainService> telemarketingCreditDomainServiceMap;
-    @Autowired
-    private RuleEngineService ruleEngineService;
     @Autowired
     private Map<String, NotificationStrategy> notificationStrategyMap;
     @Autowired
@@ -346,23 +339,12 @@ public class CreditServiceSupport {
         unifiedInputPlatformService.realTimeInteraction(dto);
     }
 
-    public void notifyTelemarketing(LoanStatePushToClueDTO dto) {
-        sender.clueStatusNotify(dto);
-    }
-
-    public HCDCreditBusiness investigation(CreditOrderId creditOrderId) {
-        return creditInvestigationService.investigation(creditOrderId);
-    }
-
-    public ZQHTCreditRuleResult processZQHTCredit(ZQHTCredit zqhtCredit) {
-        return ruleEngineService.processZQHTCredit(zqhtCredit);
+    public void notifyPrResult(LoanStatePushToClueDTO dto) {
+        sender.preResultNotify(dto);
     }
 
     public void updateZQHTCredit(ZQHTCredit zqhtCredit) {
         telemarketingCreditRepository.update(zqhtCredit);
     }
 
-    public ZQHTPreApproveRuleResult processFullPricePreApproval(ZQHTCredit zqhtCredit, ZQHTCreditRuleResult zqhtCreditRuleResult) {
-        return ruleEngineService.processFullPricePreApproval(zqhtCredit, zqhtCreditRuleResult);
-    }
 }
