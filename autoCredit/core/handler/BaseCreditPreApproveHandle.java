@@ -11,12 +11,16 @@ import com.zlhj.electronicCredit.pojo.CreditLoan;
 import com.zlhj.electronicCredit.pojo.CreditLoanRepository;
 import com.zlhj.electronicCredit.pojo.CreditUserVO;
 import com.zlhj.electronicCredit.pojo.CreditUserVORepository;
-import com.zlhj.infrastructure.po.*;
-import com.zlhj.infrastructure.repository.*;
+import com.zlhj.infrastructure.po.AuthorizedImage;
+import com.zlhj.infrastructure.po.AuthorizedImageFactory;
+import com.zlhj.infrastructure.po.CreditAuthorization;
+import com.zlhj.infrastructure.po.CreditAuthorizationFactory;
+import com.zlhj.infrastructure.repository.AuthorizedImageRepository;
+import com.zlhj.infrastructure.repository.CarAgeMileageConfigRepository;
+import com.zlhj.infrastructure.repository.CreditAuthorizationRepository;
 import com.zlhj.infrastructure.routing.RemoteBigDataService;
 import com.zlhj.infrastructure.routing.dto.RemoteInterfaceRequest;
 import com.zlhj.infrastructure.routing.dto.RemoteInterfaceResponse;
-import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.loan.SendEmailMessage;
 import com.zlhj.main.fumin.enums.BankOrgNameType;
 import com.zlhj.mq.dto.PreApproveMessage;
@@ -70,7 +74,7 @@ public abstract class BaseCreditPreApproveHandle<T> {
 	@Autowired
 	private SpcCreditOtherInfoRepository creditOtherInfoRepository;
 	@Autowired
-	private List<PreApproveValidator<CluePreApproveDTO>> validators;
+	private List<PreApproveValidator> validators;
 	@Value("${zlhj.image.postUrlDomain}")
 	protected String fileUrl;
 
@@ -128,7 +132,7 @@ public abstract class BaseCreditPreApproveHandle<T> {
 
 	protected boolean customScreening(CreditAuthorization auth) {
 		try {
-			for (PreApproveValidator<CluePreApproveDTO> v : validators) {
+			for (PreApproveValidator v : validators) {
 				if (!v.supports(ClueChanelCode.getByCode(auth.getChannelCode()))) {
 					continue;
 				}

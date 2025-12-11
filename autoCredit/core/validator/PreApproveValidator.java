@@ -3,7 +3,7 @@ package com.zlhj.unifiedInputPlatform.autoCredit.core.validator;
 import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
 import com.zlhj.infrastructure.po.CreditAuthorization;
 
-public interface PreApproveValidator<T> {
+public interface PreApproveValidator {
 
 	void validate(CreditAuthorization auth);
 

@@ -4,13 +4,12 @@ import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
 import com.zlhj.infrastructure.po.CreditAuthorization;
 import com.zlhj.infrastructure.po.VinBlacklist;
 import com.zlhj.infrastructure.repository.VinBlacklistRepository;
-import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.exceptions.VinNotComplyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VinValidator implements PreApproveValidator<CluePreApproveDTO> {
+public class VinValidator implements PreApproveValidator {
 	@Autowired
 	private VinBlacklistRepository vinBlacklistRepository;
 

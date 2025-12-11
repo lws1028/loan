@@ -4,7 +4,6 @@ import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
 import com.zlhj.infrastructure.po.CreditAuthorization;
 import com.zlhj.infrastructure.po.LicenseAccessWhitelist;
 import com.zlhj.infrastructure.repository.LicenseAccessWhitelistRepository;
-import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.exceptions.LicensePlateNotComplyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class LicensePlateValidator implements PreApproveValidator<CluePreApproveDTO> {
+public class LicensePlateValidator implements PreApproveValidator {
 
 	@Autowired
 	private LicenseAccessWhitelistRepository licenseAccessWhitelistRepository;

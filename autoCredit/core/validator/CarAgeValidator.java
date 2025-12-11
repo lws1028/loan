@@ -4,7 +4,6 @@ import com.common.LocalDateUtils;
 import com.zlhj.common.core.utils.StringUtils;
 import com.zlhj.commonLoan.business.appCommon.enums.ClueChanelCode;
 import com.zlhj.infrastructure.po.CreditAuthorization;
-import com.zlhj.infrastructure.routing.dto.clue.CluePreApproveDTO;
 import com.zlhj.unifiedInputPlatform.autoCredit.exceptions.CarAgeNotMatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 @Slf4j
-public class CarAgeValidator implements PreApproveValidator<CluePreApproveDTO> {
+public class CarAgeValidator implements PreApproveValidator {
 	@Override
 	public void validate(CreditAuthorization auth) {
 		if (StringUtils.isBlank(auth.getVehicleRegisterDate())) {
